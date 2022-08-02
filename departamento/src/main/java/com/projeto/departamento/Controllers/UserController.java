@@ -3,9 +3,7 @@ package com.projeto.departamento.Controllers;
 import com.projeto.departamento.entities.User;
 import com.projeto.departamento.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,9 +14,22 @@ public class UserController {
     @Autowired //mecanismo de injeção de dependencias do repository
     private UserRepository dao;
 
-    @GetMapping
+    @GetMapping //Endpoint para listar todos os usuarios
     public List<User>findAll(){
         List<User> result = dao.findAll();
+        return result;
+    }
+
+    @GetMapping( "/{id}") //EndPoint que retorna um usuário só
+    public User findById(@PathVariable Long id){  //para que o numero digitado na url correponda ao parâmetro da função
+        User result = dao.findById(id).get();
+        return result;
+    }
+
+    //Endpoint para salvar um novo usuario
+    @PostMapping
+    public User saveUser(@RequestBody User user){ //passa um objeto do tipo User. (O corpo da requisição) - por isso a anotation requestbody
+        User result = dao.save(user);
         return result;
     }
 }
