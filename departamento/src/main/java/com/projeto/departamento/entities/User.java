@@ -10,7 +10,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String emaii;
+    private String email;
 
     @ManyToOne  //porque dentro de um departamento pode ter varios usuários
     @JoinColumn(name = "departament_id")
@@ -34,12 +34,12 @@ public class User {
         this.name = name;
     }
 
-    public String getEmaii() {
-        return emaii;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmaii(String emaii) {
-        this.emaii = emaii;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Departament getDepartament() {
